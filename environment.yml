@@ -1,0 +1,31 @@
+# run: conda env create -f environment.yml
+name: plenoctree
+channels:
+  - pytorch
+  - defaults
+dependencies:
+  - python>=3.6.12,<3.9
+  - numpy>=1.16.4,<1.19.0
+  - pip
+  - pip:
+      - dotmap
+      - tensorboard
+      - imageio
+      - imageio-ffmpeg
+      - ipdb
+      - pretrainedmodels
+      - lpips
+      - jax>=0.2.6
+      - jaxlib>=0.1.57
+      - flax>=0.2.2
+      - opencv-python>=4.4.0
+      - Pillow>=7.2.0
+      - pyyaml>=5.3.1
+      - tensorboard>=2.4.0
+      - tensorflow>=2.3.1
+      - imageio
+      - imageio-ffmpeg
+      - pymcubes
+      - svox>=0.2.23
+  - tqdm
+  - pytorch>=1.6.0
