@@ -32,7 +32,6 @@ import yaml
 from tqdm import tqdm
 from nerf_sh.nerf import datasets
 
-BASE_DIR = "nerf_sh"
 INTERNAL = False
 
 
@@ -235,7 +234,7 @@ def update_flags(args):
     """Update the flags in `args` with the contents of the config YAML file."""
     if args.config is None:
         return
-    pth = path.join(BASE_DIR, args.config + ".yaml")
+    pth = path.join(args.config + ".yaml")
     with open_file(pth, "r") as fin:
         configs = yaml.load(fin, Loader=yaml.FullLoader)
     # Only allow args to be updated if they already exist.
