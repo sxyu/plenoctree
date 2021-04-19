@@ -1,0 +1,61 @@
+{
+    "data_root": "./data/TanksAndTemple",
+    "train_root": "./data/Plenoctree/checkpoints/tt_sh25/",
+    "scenes": ["Barn", "Caterpillar", "Family", "Truck"],
+    "scene_tasks": [{
+        "octree_name": "",
+        "train_dir": "{%}",
+        "data_dir": "{%}",
+        "config": "nerf_sh/config/tt",
+        "extr_flags": [
+            "--autoscale",
+            "--scale_alpha_thresh", "0.1",
+            "--bbox_from_data",
+            "--data_bbox_scale", "1.2",
+            "--bbox_scale", "1.0",
+            "--samples_per_cell", "256",
+            "--chunk", "8192",
+            "--no_early_stop",
+            "--renderer_step_size", "1e-5"
+        ],
+        "opt_flags": [
+            "--num_epochs", "40",
+            "--sgd",
+            "--lr", "1.5e6",
+            "--renderer_step_size", "1e-5",
+            "--split_train",
+            "--split_holdout_prop", "0.1"
+        ],
+        "eval_flags": [
+            "--renderer_step_size", "1e-5"
+        ]
+    }],
+    "tasks": [{
+        "octree_name": "",
+        "train_dir": "Ignatius",
+        "data_dir": "Ignatius",
+        "config": "nerf_sh/config/tt",
+        "extr_flags": [
+            "--autoscale",
+            "--scale_alpha_thresh", "0.1",
+            "--bbox_from_data",
+            "--data_bbox_scale", "1.2",
+            "--bbox_scale", "1.25",
+            "--samples_per_cell", "256",
+            "--chunk", "8192",
+            "--no_early_stop",
+            "--renderer_step_size", "1e-5"
+        ],
+        "opt_flags": [
+            "--num_epochs", "40",
+            "--sgd",
+            "--lr", "1.5e6",
+            "--renderer_step_size", "1e-5",
+            "--split_train",
+            "--split_holdout_prop", "0.1"
+        ],
+        "eval_flags": [
+            "--renderer_step_size", "1e-5"
+        ]
+    }]
+}
