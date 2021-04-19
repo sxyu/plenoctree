@@ -181,7 +181,7 @@ def define_flags():
     flags.DEFINE_bool("save_output", True, "save predicted images to disk if True.")
     flags.DEFINE_integer(
         "chunk",
-        131072,
+        81920,
         "the size of chunks for evaluation inferences, set to the value that"
         "fits your GPU/TPU memory.",
     )

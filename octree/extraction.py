@@ -326,8 +326,10 @@ def step2(args, tree, nerf):
     leaf_ind = torch.where(leaf_mask)[0]
     del leaf_mask
 
-    for i in tqdm(range(0, leaf_ind.size(0), args.chunk)):
-        chunk_inds = leaf_ind[i:i+args.chunk]
+    chunk_size = args.chunk // args.samples_per_cell
+
+    for i in tqdm(range(0, leaf_ind.size(0), chunk_size)):
+        chunk_inds = leaf_ind[i:i+chunk_size]
         points = tree[chunk_inds].sample(args.samples_per_cell)  # (n_cells, n_samples, 3)
         points = points.view(-1, 3)
 
