@@ -86,10 +86,10 @@ Also make sure you have the training data placed at `./data/{NeRF/nerf_synthetic
 To reproduce our results in the paper, you can simplly run:
 ```
 # NeRF-Synthetic dataset
-python -m octree.task_manager octree/config/syn_sh16.json --gpus=0,1,2,3
+python -m octree.task_manager octree/config/syn_sh16.json --gpus="0 1 2 3"
 
 # TanksAndTemple dataset
-python -m octree.task_manager octree/config/tt_sh25.json --gpus=0,1,2,3
+python -m octree.task_manager octree/config/tt_sh25.json --gpus="0 1 2 3"
 ```
 The above command will parallel all scenes in the dataset across the gpus you set. The json files 
 contain dedicated hyper-parameters towards better performance (PSNR, SSIM, LPIPS). So in this setting, a 32GB GPU is
