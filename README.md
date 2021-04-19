@@ -35,9 +35,10 @@ pip install --upgrade jax jaxlib==0.1.65+cuda110 -f https://storage.googleapis.c
 
 ## NeRF-SH Training
 
-We release our trained NeRF-SH models at [here](). You can also use the following commands to reproduce the results.
+We release our trained NeRF-SH models at [here](https://drive.google.com/drive/folders/1J0lRiDn_wOiLVpCraf6jM7vvCwDr9Dmx?usp=sharing). 
+You can also use the following commands to reproduce the results.
 
-Training and evaluation on [NeRF-Synthetic dataset]():
+Training and evaluation on [NeRF-Synthetic dataset](https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1):
 ```
 export DATA_ROOT=./data/NeRF/nerf_synthetic/
 export CKPT_ROOT=./data/Plenoctree/checkpoints/syn_sh16/
@@ -58,7 +59,7 @@ python -m nerf_sh.eval \
 Note for `SCENE=mic`, we adopt a warmup learning rate schedule (`--lr_delay_steps 50000 --lr_delay_mult 0.01`) to avoid unstable initialization.
 
 
-Training and evaluation on [TanksAndTemple dataset]():
+Training and evaluation on [TanksAndTemple dataset](https://dl.fbaipublicfiles.com/nsvf/dataset/TanksAndTemple.zip):
 ```
 export DATA_ROOT=./data/TanksAndTemple/
 export CKPT_ROOT=./data/PlenOctree/checkpoints/tt_sh25/
@@ -138,8 +139,8 @@ by sampling view directions for every points in the space. Though this makes con
 a plenoctree possible, the projection process inevitability loses the quality of the model, even with a large amount 
 of sampling view directions (which takes hours to finish). So we recommend to just directly train a NeRF-SH model end-to-end.
 
-Below is a example of project a trained [JaxNeRF model]() to a plenoctree. After extraction, you can optimize & evaluate & 
-compress the plenoctree just like usual:
+Below is a example of project a trained [JaxNeRF model](http://storage.googleapis.com/gresearch/jaxnerf/jaxnerf_pretrained_models.zip) to a plenoctree. 
+After extraction, you can optimize & evaluate & compress the plenoctree just like usual:
 ```
 export DATA_ROOT=./data/NeRF/nerf_synthetic/ 
 export CKPT_ROOT=./data/JaxNeRF/jaxnerf_models/blender/ 
