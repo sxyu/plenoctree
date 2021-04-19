@@ -167,9 +167,29 @@ def define_flags():
         "the number of steps to render a test image,"
         "better to be x00 for accurate step time record.",
     )
-    # flags.DEFINE_integer(
-    #     "gc_every", 10000, "the number of steps to run python garbage collection."
-    # )
+    flags.DEFINE_integer(
+        "gc_every", 10000, "the number of steps to run python garbage collection."
+    )
+    flags.DEFINE_float(
+        "sparsity_weight",
+        1e-3,
+        "Sparsity loss weight",
+    )
+    flags.DEFINE_float(
+        "sparsity_length",
+        0.05,
+        "Sparsity loss 'length' for alpha calculation",
+    )
+    flags.DEFINE_float(
+        "sparsity_radius",
+        1.5,
+        "Sparsity loss point sampling box 1/2 side length",
+    )
+    flags.DEFINE_integer(
+        "sparsity_npoints",
+        10000,
+        "Number of samples for sparsity loss",
+    )
 
     # Eval Flags
     flags.DEFINE_bool(
