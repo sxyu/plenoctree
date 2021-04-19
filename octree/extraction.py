@@ -359,7 +359,10 @@ def step2(args, tree, nerf):
     leaf_ind = torch.where(leaf_mask)[0]
     del leaf_mask
 
-    chunk_size = args.chunk // args.samples_per_cell
+    if args.use_viewdirs:
+        chunk_size = args.chunk // (args.samples_per_cell * args.projection_samples // 10)
+    else:
+        chunk_size = args.chunk // (args.samples_per_cell)
 
     for i in tqdm(range(0, leaf_ind.size(0), chunk_size)):
         chunk_inds = leaf_ind[i:i+chunk_size]
@@ -370,6 +373,7 @@ def step2(args, tree, nerf):
             rgb, sigma = nerf.eval_points_raw(points)
         else:  # vanilla NeRF model returns rgb, so we project them into coeffs (only SH supported)
             rgb, sigma = project_nerf_to_sh(nerf, args.sh_deg, points)
+
         rgba = torch.cat([rgb, sigma], dim=-1)
         del rgb, sigma
         rgba = rgba.reshape(-1, args.samples_per_cell, tree.data_dim).mean(dim=1)
@@ -457,12 +461,12 @@ def main(unused_argv):
 
     num_rgb_channels = FLAGS.num_rgb_channels
     if FLAGS.sh_deg >= 0:
-        assert not FLAGS.use_viewdirs and FLAGS.sg_dim == -1, (
-                "You can only use up to one of: SH, SG or use_viewdirs.")
+        assert FLAGS.sg_dim == -1, (
+            "You can only use up to one of: SH or SG")
         num_rgb_channels *= (FLAGS.sh_deg + 1) ** 2
     elif FLAGS.sg_dim > 0:
-        assert not FLAGS.use_viewdirs and FLAGS.sh_deg == -1, (
-                "You can only use up to one of: SH, SG or use_viewdirs.")
+        assert FLAGS.sh_deg == -1, (
+            "You can only use up to one of: SH or SG")
         num_rgb_channels *= FLAGS.sg_dim
     data_dim =  1 + num_rgb_channels  # alpha + rgb
     print('data dim is', data_dim)

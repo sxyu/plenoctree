@@ -1,0 +1,11 @@
+dataset: blender
+image_batching: false
+factor: 0
+num_coarse_samples: 64
+num_fine_samples: 128
+use_viewdirs: true
+white_bkgd: true
+batch_size: 1024
+sh_deg: 4
+randomized: true
+max_steps: 2000000

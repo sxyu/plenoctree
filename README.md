@@ -132,4 +132,28 @@ python -m octree.compression \
 
 ### Project Vanilla NeRF to PlenOctree
 
-(TODO)
+A vanilla trained NeRF can also be converted to a plenoctree for fast inference. To mimic the 
+view-independency propertity as in a NeRF-SH model, we project the vanilla NeRF model to SH basis functions
+by sampling view directions for every points in the space. Though this makes converting vanilla NeRF to
+a plenoctree possible, the projection process inevitability loses the quality of the model, even with a large amount 
+of sampling view directions (which takes hours to finish). So we recommend to just directly train a NeRF-SH model end-to-end.
+
+Below is a example of project a trained [JaxNeRF model]() to a plenoctree. After extraction, you can optimize & evaluate & 
+compress the plenoctree just like usual:
+```
+export DATA_ROOT=./data/NeRF/nerf_synthetic/ 
+export CKPT_ROOT=./data/JaxNeRF/jaxnerf_models/blender/ 
+export SCENE=chair
+export CONFIG_FILE=nerf_sh/config/misc/proj.yaml
+
+python -m octree.extraction \
+    --train_dir $CKPT_ROOT/$SCENE/ --is_jaxnerf_ckpt \
+    --config $CONFIG_FILE \
+    --data_dir $DATA_ROOT/$SCENE/ \
+    --output $CKPT_ROOT/$SCENE/octrees/tree.npz \
+    --projection_samples 100
+```
+Note `--projection_samples` controls how many sampling view directions are used. More view directions give better
+projection quality but consumes more GPU memory and takes longer time to finish. For example, for the `drums` scene 
+in the NeRF-Synthetic dataset, `--projection_samples=100 / 10000` gives models with `PSNR=22.50 / 23.85`, and takes about
+`2 mins / 2 hours` respectively.

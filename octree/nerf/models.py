@@ -294,14 +294,15 @@ def construct_nerf(args):
         )
 
     num_rgb_channels = args.num_rgb_channels
-    if args.sh_deg >= 0:
-        assert not args.use_viewdirs and args.sg_dim == -1, (
-                "You can only use up to one of: SH, SG or use_viewdirs.")
-        num_rgb_channels *= (args.sh_deg + 1) ** 2
-    elif args.sg_dim > 0:
-        assert not args.use_viewdirs and args.sh_deg == -1, (
-                "You can only use up to one of: SH, SG or use_viewdirs.")
-        num_rgb_channels *= args.sg_dim
+    if not args.use_viewdirs:
+        if args.sh_deg >= 0:
+            assert args.sg_dim == -1, (
+                "You can only use up to one of: SH or SG.")
+            num_rgb_channels *= (args.sh_deg + 1) ** 2
+        elif args.sg_dim > 0:
+            assert args.sh_deg == -1, (
+                "You can only use up to one of: SH or SG.")
+            num_rgb_channels *= args.sg_dim
 
     model = NerfModel(
         min_deg_point=args.min_deg_point,
