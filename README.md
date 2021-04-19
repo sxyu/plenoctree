@@ -97,7 +97,7 @@ needed for each scene and in averange the process takes about 15 minutes to fini
 will be saved to `./data/PlenOctree/checkpoints/{syn_sh16, tt_sh25}/$SCENE/octrees/`.
 
 
-A more straight-forward script for demonstration (not the same hyper-parameters used in the paper):
+Below is a more straight-forward script for demonstration purpose:
 ```
 export DATA_ROOT=./data/NeRF/nerf_synthetic/
 export CKPT_ROOT=./data/PlenOctree/checkpoints/syn_sh16
@@ -117,14 +117,19 @@ python -m octree.optimization \
     --output $CKPT_ROOT/$SCENE/octrees/tree_opt.npz
 
 python -m octree.evaluation \
-    --input $CKPT_ROOT/$SCENE/tree_opt.npz \
+    --input $CKPT_ROOT/$SCENE/octrees/tree_opt.npz \
     --config $CONFIG_FILE \
     --data_dir $DATA_ROOT/$SCENE/
 
+# [Optional] Only used for in-browser viewing.
 python -m octree.compression \
-    $CKPT_ROOT/$SCENE/tree_opt.npz \
+    $CKPT_ROOT/$SCENE/octrees/tree_opt.npz \
     --out_dir $CKPT_ROOT/$SCENE/ \
     --overwrite
 ```
 
-### From NeRF (Projection)
+## MISC
+
+### Project Vanilla NeRF to PlenOctree
+
+(TODO)
