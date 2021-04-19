@@ -20,9 +20,20 @@
 #  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #  POSSIBILITY OF SUCH DAMAGE.
-"""
-Example
-python extract_octree.py --ckpt_path checkpoints/lego/epoch=8.ckpt
+"""Extract a plenoctree from a trained NeRF-SH model.
+
+Usage:
+
+export DATA_ROOT=./data/NeRF/nerf_synthetic/
+export CKPT_ROOT=./data/PlenOctree/checkpoints/syn_sh16
+export SCENE=chair
+export CONFIG_FILE=nerf_sh/config/blender
+
+python -m octree.extraction \
+    --train_dir $CKPT_ROOT/$SCENE/ --is_jaxnerf_ckpt \
+    --config $CONFIG_FILE \
+    --data_dir $DATA_ROOT/$SCENE/ \
+    --output $CKPT_ROOT/$SCENE/octrees/tree.npz
 """
 import os
 # Get rid of ugly TF logs

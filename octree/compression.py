@@ -20,10 +20,12 @@
 #  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #  POSSIBILITY OF SUCH DAMAGE.
-"""
-Compress octree, including quantization using median cut algorithm
-Basic usage:
-python compress_octree.py x.npz [y.npz ...]
+"""Compress a plenoctree.
+
+Including quantization using median cut algorithm.
+
+Usage:
+python compression.py x.npz [y.npz ...]
 """
 import sys
 import numpy as np

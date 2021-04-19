@@ -20,8 +20,20 @@
 #  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #  POSSIBILITY OF SUCH DAMAGE.
-"""
-python optimize_octree.py octrees/out.npz --render_interval 20 --root_dir /home/sxyu/proj/nerf/data/nerf_synthetic/lego
+"""Optimize a plenoctree through finetuning on train set.
+
+Usage:
+
+export DATA_ROOT=./data/NeRF/nerf_synthetic/
+export CKPT_ROOT=./data/PlenOctree/checkpoints/syn_sh16
+export SCENE=chair
+export CONFIG_FILE=nerf_sh/config/blender
+
+python -m octree.optimization \
+    --input $CKPT_ROOT/$SCENE/tree.npz \
+    --config $CONFIG_FILE \
+    --data_dir $DATA_ROOT/$SCENE/ \
+    --output $CKPT_ROOT/$SCENE/octrees/tree_opt.npz
 """
 import svox
 import torch
