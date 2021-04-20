@@ -340,7 +340,7 @@ def step1(args, tree, nerf, dataset):
     print(' Building octree')
     for i in range(args.init_grid_depth - 1):
         tree[grid].refine()
-    refine_chunk = 20000000
+    refine_chunk = 2000000
     if grid.shape[0] <= refine_chunk:
         tree[grid].refine()
     else:
