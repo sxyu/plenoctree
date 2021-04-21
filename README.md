@@ -23,11 +23,11 @@ pip install --upgrade pip
 Or you can install the dependencies manually by:
 ```
 conda install pytorch torchvision cudatoolkit=11.0 -c pytorch
-conda install svox tqdm
-pip install tensorboard imageio imageio-ffmpeg ipdb lpips jax jaxlib flax opencv-python Pillow pyyaml tensorflow pymcubes
+conda install tqdm
+pip install -r requirements.txt
 ```
 
-[Optional] Install GPU and TPU support for Jax. This is useful for NeRF-SH training only.
+[Optional] Install GPU and TPU support for Jax. This is useful for NeRF-SH training.
 Remember to **change cuda110 to your CUDA version**, e.g. cuda102 for CUDA 10.2.
 ```
 pip install --upgrade jax jaxlib==0.1.65+cuda110 -f https://storage.googleapis.com/jax-releases/jax_releases.html
@@ -139,7 +139,7 @@ by sampling view directions for every points in the space. Though this makes con
 a plenoctree possible, the projection process inevitability loses the quality of the model, even with a large amount 
 of sampling view directions (which takes hours to finish). So we recommend to just directly train a NeRF-SH model end-to-end.
 
-Below is a example of project a trained [JaxNeRF model](http://storage.googleapis.com/gresearch/jaxnerf/jaxnerf_pretrained_models.zip) to a plenoctree. 
+Below is a example of projecting a trained [JaxNeRF model](http://storage.googleapis.com/gresearch/jaxnerf/jaxnerf_pretrained_models.zip) to a plenoctree. 
 After extraction, you can optimize & evaluate & compress the plenoctree just like usual:
 ```
 export DATA_ROOT=./data/NeRF/nerf_synthetic/ 
