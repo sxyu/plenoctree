@@ -490,11 +490,11 @@ def main(unused_argv):
     tree.shrink_to_fit()
     print(tree)
 
+    del dataset.images
     print('* Saving', FLAGS.output)
     tree.save(FLAGS.output, compress=False)  # Faster saving
 
     if FLAGS.eval:
-        del dataset
         dataset = datasets.get_dataset("test", FLAGS)
         print('* Evaluation (before fine tune)')
         avg_psnr, avg_ssim, avg_lpips, out_frames = utils.eval_octree(tree,

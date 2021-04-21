@@ -21,7 +21,6 @@
             "--no_early_stop",
             "--renderer_step_size", "1e-5"],
         "eval_flags": [
-            "--no_early_stop", 
             "--renderer_step_size", "1e-5"]
     }],
 "tasks": [{
@@ -44,7 +43,6 @@
             "--no_early_stop",
             "--renderer_step_size", "1e-5"],
         "eval_flags": [
-            "--no_early_stop", 
             "--renderer_step_size", "1e-5"]
     },{
         "octree_name": "",
@@ -65,7 +63,6 @@
             "--no_early_stop",
             "--renderer_step_size", "1e-5"],
         "eval_flags": [
-            "--no_early_stop", 
             "--renderer_step_size", "1e-5"]
     }]
 }
