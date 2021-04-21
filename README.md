@@ -62,7 +62,7 @@ Note for `SCENE=mic`, we adopt a warmup learning rate schedule (`--lr_delay_step
 Training and evaluation on [TanksAndTemple dataset](https://dl.fbaipublicfiles.com/nsvf/dataset/TanksAndTemple.zip):
 ```
 export DATA_ROOT=./data/TanksAndTemple/
-export CKPT_ROOT=./data/PlenOctree/checkpoints/tt_sh25/
+export CKPT_ROOT=./data/Plenoctree/checkpoints/tt_sh25/
 export SCENE=Barn
 export CONFIG_FILE=nerf_sh/config/tt
 
