@@ -145,7 +145,7 @@ After extraction, you can optimize & evaluate & compress the plenoctree just lik
 export DATA_ROOT=./data/NeRF/nerf_synthetic/ 
 export CKPT_ROOT=./data/JaxNeRF/jaxnerf_models/blender/ 
 export SCENE=drums
-export CONFIG_FILE=nerf_sh/config/misc/proj.yaml
+export CONFIG_FILE=nerf_sh/config/misc/proj
 
 python -m octree.extraction \
     --train_dir $CKPT_ROOT/$SCENE/ --is_jaxnerf_ckpt \
@@ -158,5 +158,5 @@ python -m octree.extraction \
 Note `--projection_samples` controls how many sampling view directions are used. More sampling view directions give better
 projection quality but takes longer time to finish. For example, for the `drums` scene 
 in the NeRF-Synthetic dataset, `100 / 10000` sampling view directions takes about `2 mins / 2 hours` to finish the plenoctree extraction. 
-It produce *raw* plenoctrees with `PSNR=22.50 / 23.85` (before optimization). Note that extraction from a NeRF-SH model produce 
+It produce *raw* plenoctrees with `PSNR=22.49 / 23.84` (before optimization). Note that extraction from a NeRF-SH model produce 
 a *raw* plenoctree with `PSNR=25.01`.
