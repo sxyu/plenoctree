@@ -26,8 +26,6 @@ dependencies:
   - mkl_random=1.1.1=py38h0573a6f_0
   - ncurses=6.2=he6710b0_1
   - ninja=1.10.2=hff7bd54_1
-  - numpy=1.19.2=py38h54aff64_0
-  - numpy-base=1.19.2=py38hfa32c7d_0
   - olefile=0.46=py_0
   - openssl=1.1.1k=h27cfd23_0
   - pillow=8.2.0=py38he98fc37_0
@@ -60,7 +58,7 @@ dependencies:
     - google-auth==1.29.0
     - google-auth-oauthlib==0.4.4
     - google-pasta==0.2.0
-    - grpcio==1.32.0
+    - grpcio==1.37.0
     - h5py==2.10.0
     - idna==2.10
     - imageio==2.9.0
@@ -77,6 +75,7 @@ dependencies:
     - markdown==3.3.4
     - matplotlib==3.4.1
     - msgpack==1.0.2
+    - numpy==1.18.5
     - oauthlib==3.1.0
     - opencv-python==4.5.1.48
     - opt-einsum==3.3.0
@@ -98,10 +97,11 @@ dependencies:
     - rsa==4.7.2
     - scipy==1.6.2
     - svox==0.2.26
-    - tensorboard==2.4.1
+    - tensorboard==2.5.0
+    - tensorboard-data-server==0.6.0
     - tensorboard-plugin-wit==1.8.0
-    - tensorflow==2.4.1
-    - tensorflow-estimator==2.4.0
+    - tensorflow==2.3.1
+    - tensorflow-estimator==2.3.0
     - termcolor==1.1.0
     - toml==0.10.2
     - traitlets==5.0.5
