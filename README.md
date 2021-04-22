@@ -142,7 +142,7 @@ a plenoctree possible, the projection process inevitability loses the quality of
 of sampling view directions (which takes hours to finish). So we recommend to just directly train a NeRF-SH model end-to-end.
 
 Below is a example of projecting a trained vanilla NeRF model from 
-[JaxNeRR repo](https://github.com/google-research/google-research/tree/master/jaxnerf) 
+[JaxNeRF repo](https://github.com/google-research/google-research/tree/master/jaxnerf) 
 ([Download Link](http://storage.googleapis.com/gresearch/jaxnerf/jaxnerf_pretrained_models.zip)) to a plenoctree. 
 After extraction, you can optimize & evaluate & compress the plenoctree just like usual:
 ```
