@@ -95,7 +95,7 @@ python -m octree.task_manager octree/config/syn_sh16.json --gpus="0 1 2 3"
 python -m octree.task_manager octree/config/tt_sh25.json --gpus="0 1 2 3"
 ```
 The above command will parallel all scenes in the dataset across the gpus you set. The json files 
-contain dedicated hyper-parameters towards better performance (PSNR, SSIM, LPIPS). So in this setting, a 32GB GPU is
+contain dedicated hyper-parameters towards better performance (PSNR, SSIM, LPIPS). So in this setting, a 24GB GPU is
 needed for each scene and in averange the process takes about 15 minutes to finish. The converted plenoctree
 will be saved to `./data/PlenOctree/checkpoints/{syn_sh16, tt_sh25}/$SCENE/octrees/`.
 
