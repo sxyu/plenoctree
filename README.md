@@ -35,10 +35,11 @@ pip install --upgrade jax jaxlib==0.1.65+cuda110 -f https://storage.googleapis.c
 
 ## NeRF-SH Training
 
-We release our trained NeRF-SH models at [here](https://drive.google.com/drive/folders/1J0lRiDn_wOiLVpCraf6jM7vvCwDr9Dmx?usp=sharing). 
-You can also use the following commands to reproduce the results.
+We release our trained NeRF-SH models as well as converted plenoctrees at 
+[Google Drive](https://drive.google.com/drive/folders/1J0lRiDn_wOiLVpCraf6jM7vvCwDr9Dmx?usp=sharing). 
+You can also use the following commands to reproduce the NeRF-SH models.
 
-Training and evaluation on [NeRF-Synthetic dataset](https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1):
+Training and evaluation on the **NeRF-Synthetic dataset** ([Google Drive](https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1)):
 ```
 export DATA_ROOT=./data/NeRF/nerf_synthetic/
 export CKPT_ROOT=./data/Plenoctree/checkpoints/syn_sh16/
@@ -59,7 +60,8 @@ python -m nerf_sh.eval \
 Note for `SCENE=mic`, we adopt a warmup learning rate schedule (`--lr_delay_steps 50000 --lr_delay_mult 0.01`) to avoid unstable initialization.
 
 
-Training and evaluation on [TanksAndTemple dataset](https://dl.fbaipublicfiles.com/nsvf/dataset/TanksAndTemple.zip):
+Training and evaluation on **TanksAndTemple dataset** 
+([Download Link](https://dl.fbaipublicfiles.com/nsvf/dataset/TanksAndTemple.zip)) from the [NSVF](https://github.com/facebookresearch/NSVF) paper:
 ```
 export DATA_ROOT=./data/TanksAndTemple/
 export CKPT_ROOT=./data/Plenoctree/checkpoints/tt_sh25/
@@ -81,7 +83,7 @@ python -m nerf_sh.eval \
 ## PlenOctrees Conversion and Optimization
 
 Before converting the NeRF-SH models into plenoctrees, you should already have the 
-NeRF-SH models trained and placed at `./data/PlenOctree/checkpoints/{syn_sh16, tt_sh25}/`. 
+NeRF-SH models trained/downloaded and placed at `./data/PlenOctree/checkpoints/{syn_sh16, tt_sh25}/`. 
 Also make sure you have the training data placed at `./data/{NeRF/nerf_synthetic, TanksAndTemple}`.
 
 To reproduce our results in the paper, you can simplly run:
@@ -139,7 +141,9 @@ by sampling view directions for every points in the space. Though this makes con
 a plenoctree possible, the projection process inevitability loses the quality of the model, even with a large amount 
 of sampling view directions (which takes hours to finish). So we recommend to just directly train a NeRF-SH model end-to-end.
 
-Below is a example of projecting a trained [JaxNeRF model](http://storage.googleapis.com/gresearch/jaxnerf/jaxnerf_pretrained_models.zip) to a plenoctree. 
+Below is a example of projecting a trained vanilla NeRF model from 
+[JaxNeRR repo](https://github.com/google-research/google-research/tree/master/jaxnerf) 
+([Download Link](http://storage.googleapis.com/gresearch/jaxnerf/jaxnerf_pretrained_models.zip)) to a plenoctree. 
 After extraction, you can optimize & evaluate & compress the plenoctree just like usual:
 ```
 export DATA_ROOT=./data/NeRF/nerf_synthetic/ 
