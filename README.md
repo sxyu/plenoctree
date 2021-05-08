@@ -83,8 +83,9 @@ python -m nerf_sh.eval \
 ## PlenOctrees Conversion and Optimization
 
 Before converting the NeRF-SH models into plenoctrees, you should already have the 
-NeRF-SH models trained/downloaded and placed at `./data/PlenOctree/checkpoints/{syn_sh16, tt_sh25}/`. 
-Also make sure you have the training data placed at `./data/{NeRF/nerf_synthetic, TanksAndTemple}`.
+NeRF-SH models trained/downloaded and placed at `./data/Plenoctree/checkpoints/{syn_sh16, tt_sh25}/`. 
+Also make sure you have the training data placed at 
+`./data/NeRF/nerf_synthetic` and/or `./data/TanksAndTemple`.
 
 To reproduce our results in the paper, you can simplly run:
 ```
@@ -97,13 +98,13 @@ python -m octree.task_manager octree/config/tt_sh25.json --gpus="0 1 2 3"
 The above command will parallel all scenes in the dataset across the gpus you set. The json files 
 contain dedicated hyper-parameters towards better performance (PSNR, SSIM, LPIPS). So in this setting, a 24GB GPU is
 needed for each scene and in averange the process takes about 15 minutes to finish. The converted plenoctree
-will be saved to `./data/PlenOctree/checkpoints/{syn_sh16, tt_sh25}/$SCENE/octrees/`.
+will be saved to `./data/Plenoctree/checkpoints/{syn_sh16, tt_sh25}/$SCENE/octrees/`.
 
 
 Below is a more straight-forward script for demonstration purpose:
 ```
 export DATA_ROOT=./data/NeRF/nerf_synthetic/
-export CKPT_ROOT=./data/PlenOctree/checkpoints/syn_sh16
+export CKPT_ROOT=./data/Plenoctree/checkpoints/syn_sh16
 export SCENE=chair
 export CONFIG_FILE=nerf_sh/config/blender
 
