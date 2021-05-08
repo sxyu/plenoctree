@@ -26,6 +26,6 @@ dependencies:
       - imageio
       - imageio-ffmpeg
       - pymcubes
-      - svox>=0.2.23
+      - svox>=0.2.28
   - tqdm
   - pytorch>=1.6.0
