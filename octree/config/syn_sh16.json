@@ -1,0 +1,68 @@
+{
+"data_root": "./data/NeRF/nerf_synthetic/",
+"train_root": "./data/Plenoctree/checkpoints/syn_sh16/",
+"scenes": ["chair", "drums", "ficus", "hotdog", "lego", "ship"],
+"scene_tasks": [{
+        "octree_name": "",
+        "train_dir": "{%}",
+        "data_dir": "{%}",
+        "config": "nerf_sh/config/blender",
+        "extr_flags": [
+            "--autoscale",
+            "--scale_alpha_thresh", "0.1",
+            "--radius", "1.4",
+            "--samples_per_cell", "256",
+            "--no_early_stop",
+            "--renderer_step_size", "1e-5"],
+        "opt_flags": [
+            "--num_epochs", "80", 
+            "--sgd", 
+            "--lr", "1e7",
+            "--no_early_stop",
+            "--renderer_step_size", "1e-5"],
+        "eval_flags": [
+            "--renderer_step_size", "1e-5"]
+    }],
+"tasks": [{
+        "octree_name": "",
+        "train_dir": "materials",
+        "data_dir": "materials",
+        "config": "nerf_sh/config/blender",
+        "extr_flags": [
+            "--autoscale",
+            "--bbox_scale", "1.1",
+            "--scale_alpha_thresh", "0.1",
+            "--radius", "1.4",
+            "--samples_per_cell", "256",
+            "--no_early_stop",
+            "--renderer_step_size", "1e-5"],
+        "opt_flags": [
+            "--num_epochs", "80", 
+            "--sgd", 
+            "--lr", "1e7",
+            "--no_early_stop",
+            "--renderer_step_size", "1e-5"],
+        "eval_flags": [
+            "--renderer_step_size", "1e-5"]
+    },{
+        "octree_name": "",
+        "train_dir": "mic",
+        "data_dir": "mic",
+        "config": "nerf_sh/config/blender",
+        "extr_flags": [
+            "--autoscale",
+            "--scale_alpha_thresh", "0.1",
+            "--radius", "1.6",
+            "--samples_per_cell", "256",
+            "--no_early_stop",
+            "--renderer_step_size", "1e-5"],
+        "opt_flags": [
+            "--num_epochs", "80", 
+            "--sgd", 
+            "--lr", "1e7",
+            "--no_early_stop",
+            "--renderer_step_size", "1e-5"],
+        "eval_flags": [
+            "--renderer_step_size", "1e-5"]
+    }]
+}
