@@ -374,9 +374,23 @@ def step2(args, tree, nerf):
         else:  # vanilla NeRF model returns rgb, so we project them into coeffs (only SH supported)
             rgb, sigma = project_nerf_to_sh(nerf, args.sh_deg, points)
 
-        rgba = torch.cat([rgb, sigma], dim=-1)
-        del rgb, sigma
-        rgba = rgba.reshape(-1, args.samples_per_cell, tree.data_dim).mean(dim=1)
+        if tree.data_format.format == tree.data_format.RGBA:
+            rgb = rgb.reshape(-1, args.samples_per_cell, tree.data_dim - 1);
+            sigma = sigma.reshape(-1, args.samples_per_cell, 1);
+            sigma_avg = sigma.mean(dim=1)
+
+            reso = 2 ** (args.init_grid_depth + 1)
+            approx_delta = 2.0 / reso
+            alpha = 1.0 - torch.exp(-approx_delta * sigma)
+            msum = alpha.sum(dim=1)
+            rgb_avg = (rgb * alpha).sum(dim=1) / msum
+            rgb_avg[msum[..., 0] < 1e-3] = 0
+            rgba = torch.cat([rgb_avg, sigma_avg], dim=-1)
+            del rgb, sigma
+        else:
+            rgba = torch.cat([rgb, sigma], dim=-1)
+            del rgb, sigma
+            rgba = rgba.reshape(-1, args.samples_per_cell, tree.data_dim).mean(dim=1)
         tree[chunk_inds] = rgba
 
 def euler2mat(angle):
