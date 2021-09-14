@@ -165,3 +165,14 @@ projection quality but takes longer time to finish. For example, for the `drums`
 in the NeRF-Synthetic dataset, `100 / 10000` sampling view directions takes about `2 mins / 2 hours` to finish the plenoctree extraction. 
 It produce *raw* plenoctrees with `PSNR=22.49 / 23.84` (before optimization). Note that extraction from a NeRF-SH model produce 
 a *raw* plenoctree with `PSNR=25.01`.
+
+### List of possible improvements
+
+In the interst reproducibility, the parameters used in the paper are also used here.
+For future work we recommend trying the changes in mip-NeRF <https://jonbarron.info/mipnerf/> 
+for improved stability and quality:
+
+- Centered pixels (+ 0.5 on x, y) when generating rays
+- Use shifted SoftPlus instead of ReLU for density (including for octree optimization)
+- Pad the RGB sigmoid output (avoid low gradient region near 0/1 color)
+- Multi-scale training from mip-NeRF
