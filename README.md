@@ -8,6 +8,15 @@ Alex Yu, Ruilong Li, Matthew Tancik, Hao Li, Ren Ng, Angjoo Kanazawa
 
 https://alexyu.net/plenoctrees
 
+```
+@inproceedings{yu2021plenoctrees,
+      title={{PlenOctrees} for Real-time Rendering of Neural Radiance Fields},
+      author={Alex Yu and Ruilong Li and Matthew Tancik and Hao Li and Ren Ng and Angjoo Kanazawa},
+      year={2021},
+      booktitle={ICCV},
+}
+```
+
 Please see the following repository for our C++ PlenOctrees volume renderer:
 <https://github.com/sxyu/volrend>
 
@@ -176,3 +185,5 @@ for improved stability and quality:
 - Use shifted SoftPlus instead of ReLU for density (including for octree optimization)
 - Pad the RGB sigmoid output (avoid low gradient region near 0/1 color)
 - Multi-scale training from mip-NeRF
+
+
