@@ -304,3 +304,43 @@ def ProjectFunctionNeRF(order: int, sperical_func: Callable, batch_size: int, sa
   weight = 4.0 * math.pi / sample_count
   coeffs *= weight
   return coeffs, others
+
+def ProjectFunctionNeRFSparse(
+    order: int,
+    spherical_func: Callable,
+    sample_count: int,
+    device="cpu",
+):
+    assert order >= 0, "Order must be at least zero."
+    assert sample_count > 0, "Sample count must be at least one."
+    C = 3  # rgb channels
+
+    # generate sample_count uniformly and stratified samples over the sphere
+    # See http://www.bogotobogo.com/Algorithms/uniform_distribution_sphere.php
+    theta, phi = spherical_uniform_sampling(sample_count, device=device)
+    dirs = spher2cart(theta, phi)  # [sample_count, 3]
+
+    # evaluate the analytic function for the current spherical coords
+    func_value, others = spherical_func(dirs)  # func_value [batch_size, sample_count, C]
+
+    batch_size = func_value.shape[0]
+
+    coeff_count = GetCoefficientCount(order)
+    basis_vals = torch.empty(
+        [sample_count, coeff_count], dtype=torch.float32
+    ).to(device)
+
+    # evaluate the SH basis functions up to band O, scale them by the
+    # function's value and accumulate them over all generated samples
+    for l in range(order + 1):  # end inclusive
+        for m in range(-l, l + 1):  # end inclusive
+            basis_vals[:, GetIndex(l, m)] = EvalSH(l, m, dirs)
+
+    basis_vals = basis_vals.view(
+           sample_count, coeff_count) # [sample_count, coeff_count]
+    func_value = func_value.transpose(0, 1).reshape(
+           sample_count, batch_size * C) # [sample_count, batch_size * C]
+    soln = torch.lstsq(func_value, basis_vals).solution[:basis_vals.size(1)]
+    soln = soln.T.reshape(batch_size, C, -1)
+    return soln, others
+ 
