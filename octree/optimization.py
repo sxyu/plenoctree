@@ -167,7 +167,7 @@ def main(unused_argv):
     t = svox.N3Tree.load(FLAGS.input, map_location=device)
     #  t.nan_to_num_()
 
-    if 'llff' in FLAGS.config:
+    if 'llff' in FLAGS.config and (not FLAGS.spherify):
         ndc_config = svox.NDCConfig(width=W, height=H, focal=focal)
     else:
         ndc_config = None
